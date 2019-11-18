@@ -7,7 +7,7 @@ PREFIX    ?= /usr/local
 MANPREFIX ?= $(PREFIX)/share/man
 
 # CUDA arch
-CUDA_GPU_ARCH ?= sm_75
+CUDA_GPU_ARCH ?= sm_52
 
 # Compiler
 CXX ?= clang++
