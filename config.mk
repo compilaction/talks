@@ -1,6 +1,5 @@
 # Project version
 NAME    = prog
-VERSION = 0.0.1
 
 # Paths
 PREFIX    ?= /usr/local
@@ -15,7 +14,6 @@ CU  ?= clang++
 
 # Compile flags
 CXXFLAGS += -O3 -march=corei7
-CXXFLAGS += -DVERSION=\"$(VERSION)\"
 CXXFLAGS += -Wall -Wextra -Werror -Wnull-dereference \
             -Wdouble-promotion -Wshadow
 
