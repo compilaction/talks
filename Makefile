@@ -40,6 +40,10 @@ clean:
 run: $(NAME)
 	./$(NAME)
 
+remote: $(NAME)
+	scp $(NAME) $(REMOTE_EXEC_HOST):/tmp/$(NAME)
+		ssh $(REMOTE_EXEC_HOST) /tmp/$(NAME)
+
 dump: $(NAME)
 	objdump -dC $(NAME) > $(NAME).asm
 
