@@ -14,8 +14,8 @@ CU  ?= clang++
 
 # Compile flags
 CXXFLAGS += -O3 -march=corei7
-CXXFLAGS += -Wall -Wextra -Werror -Wnull-dereference \
-            -Wdouble-promotion -Wshadow
+#CXXFLAGS += -Wall -Wextra -Werror -Wnull-dereference \
+#            -Wdouble-promotion -Wshadow
 
 # Language
 CXXFLAGS += -std=c++17
