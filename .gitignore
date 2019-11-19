@@ -1,4 +1,10 @@
+# Extensions
 *.d
 *.asm
 *.o
+
+# Compiler output
 prog
+
+# Images
+volta.png
