@@ -8,10 +8,6 @@ MANPREFIX ?= $(PREFIX)/share/man
 # CUDA arch
 CUDA_GPU_ARCH ?= sm_52
 
-# Compiler
-CXX ?= clang++
-CU  ?= clang++
-
 # Compile flags
 CXXFLAGS += -O3 -march=corei7
 #CXXFLAGS += -Wall -Wextra -Werror -Wnull-dereference \

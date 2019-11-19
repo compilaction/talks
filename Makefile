@@ -20,13 +20,13 @@ all: $(NAME)
 
 # Compilation
 .cpp.o:
-	$(CXX) $(CXXFLAGS) -MMD -c -o $@ $<
+	clang++ $(CXXFLAGS) -MMD -c -o $@ $<
 .cu.o:
-	$(CU) $(CXXFLAGS) $(CUFLAGS) -MMD -c -o $@ $<
+	clang++ $(CXXFLAGS) $(CUFLAGS) -MMD -c -o $@ $<
 
 # Linking
 $(NAME): $(OBJ)
-	$(CU) -o $@ $(OBJ) $(LDFLAGS)
+	clang++ -o $@ $(OBJ) $(LDFLAGS)
 
 # Dependencies
 -include $(DEPS)
