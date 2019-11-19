@@ -6,7 +6,7 @@
 
 
 Introduction, Écosystème et Bonnes Pratiques
---> https://github.com/JPenuchot/cuda-pres
+--> https://github.com/compilaction/talks/
 
 Jules Pénuchot
 --> jules@penuchot.com | @JPenuchot (Twitter/GitHub)
