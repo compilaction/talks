@@ -1,10 +1,6 @@
 # Project version
 NAME    = prog
 
-# Paths
-PREFIX    ?= /usr/local
-MANPREFIX ?= $(PREFIX)/share/man
-
 # CUDA arch
 CUDA_GPU_ARCH ?= sm_52
 

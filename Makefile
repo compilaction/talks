@@ -44,7 +44,4 @@ remote: $(NAME)
 	scp $(NAME) $(REMOTE_EXEC_HOST):/tmp/$(NAME)
 		ssh $(REMOTE_EXEC_HOST) /tmp/$(NAME)
 
-dump: $(NAME)
-	objdump -dC $(NAME) > $(NAME).asm
-
-.PHONY: all clean slurm run dump
+.PHONY: all clean remote run
