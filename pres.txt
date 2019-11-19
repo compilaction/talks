@@ -15,8 +15,8 @@ Jules Pénuchot
    - Ste||ar Group (HPX), LSU: Blaze CUDA
    - Compilaction @ www.compilaction.com (Joël Falcou & moi-même)
 
---> CUDA C++, où en est l'écosystème, comment programmer efficacement ?
 
+--> CUDA C++, où en est l'écosystème, comment programmer efficacement ?
 
                                        ·
    ________  ______  ___       ______              ___
@@ -38,7 +38,7 @@ Jules Pénuchot
    -  groupe de N threads assignés à un même Streaming Multiprocessor (SM)
 
 --> Tailler ses blocks par multiples de 32!
-
+    https://devblogs.nvidia.com/even-easier-introduction-cuda/
                                        ·
     __  __               __
    / / / /___ __________/ /      ______ _________
@@ -47,8 +47,8 @@ Jules Pénuchot
 /_/ /_/\__,_/_/   \__,_/ |__/|__/\__,_/_/   \___/
 
 --> SM = core SIMD, pouvant exécuter 32 threads (1 warp) simultanément
+    "Thread" d'un warp -> Instance "SIMD" d'un SM
 
-- "Thread" d'un warp -> Instance "SIMD" d'un SM
 
 - Branchement -> masquage de registres
   --> Conditions = perte de perfs! (threads en attente)
@@ -59,7 +59,7 @@ Jules Pénuchot
 
 - GPUs: + de latence, mais + de débit
   --> Volta: HBM2 900Go/s (~10x plus qu'un 2990WX, 32c/64t), NVLink 300Go/s
-  Toutefois attention à l'adressage et à la contention sur la shared memory...
+      https://devblogs.nvidia.com/inside-volta/
                                        ·
    _____       ______
   / ___/____  / __/ /__      ______ _________
@@ -89,8 +89,10 @@ Jules Pénuchot
 /_/   /_/   \__,_/\__/_/\__, /\__,_/\___/
                           /_/
 
-- Fonctions "global": `void __global__ fun( ... ) { ... }`
-  Appel: `fun <<< grid_size, block_size >>> (...);`
+- Point d'entrée - Fonctions "global": `void __global__ fun( ... ) { ... }`
+  Appel: `fun <<< grid_size, block_size >>> ( ... );`
+  --> Le CPU pilote des appels sur des données dans la mémoire GPU
+      /!\ Ne passer que des pointeurs, itérateurs, vues, etc.
 
 - Fonctions & lambdas `__host__ __device__` ou `constexpr` appelables sur GPU
 
@@ -100,8 +102,6 @@ Jules Pénuchot
   --> Utilisable comme allocateur pour std::vector
 
 - `thrust::vector`, algorithmes Thrust, etc.
-
-
                                        ·
     ____                        __
    / __ \___  _________  __  __/ /___ _____ ____
@@ -117,13 +117,35 @@ Threads 1, 2, 3 & 4, itérations 1 & 2:
 i\T| 1  2  3  4
 0  | 0| 1| 2| 3|
 1  | 4| 5| 6| 7|
-  --> Adressage contigu: OK
+  --> Adressage contigu, OK
 
 i\T| 1  2  3  4
 0  | 0| 2| 4| 6|
 1  | 1| 3| 5| 7|
-  --> Adressage non contigu: PAS OK
+  --> Adressage non contigu, PAS OK: localité mauvaise
                                        ·
+  ________                    __
+ /_  __/ /_  _______  _______/ /_
+  / / / __ \/ ___/ / / / ___/ __/
+ / / / / / / /  / /_/ (__  ) /_
+/_/ /_/ /_/_/   \__,_/____/\__/
+
+À utiliser en priorité pour ne pas écrire de kernels à la main
+
+- thurst::generate
+- thurst::generate_n
+- thrust::sequence
+- thrust::transform
+- thrust::reduce
+- thrust::...
+
+/!\ Peut déclencher des erreurs avec clang selon les flags...
+
+--> https://docs.nvidia.com/cuda/thrust/index.html
+    Repose sur CUB: https://nvlabs.github.io/cub/
+    Bonus: https://github.com/nvlabs
+                                       ·
+
 
 
 
