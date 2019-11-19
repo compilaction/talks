@@ -9,7 +9,7 @@ MANPREFIX ?= $(PREFIX)/share/man
 CUDA_GPU_ARCH ?= sm_52
 
 # Compile flags
-CXXFLAGS += -O3 -march=corei7
+CXXFLAGS += -O3 -march=native
 #CXXFLAGS += -Wall -Wextra -Werror -Wnull-dereference \
 #            -Wdouble-promotion -Wshadow
 
